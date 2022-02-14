@@ -16,6 +16,19 @@ pub struct BanResult {
     error: Option<Error>,
 }
 
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ReportResult {
+    #[serde(rename = "success")]
+    success: bool,
+
+    #[serde(rename = "result")]
+    result: Option<String>,
+
+    #[serde(rename = "error")]
+    error: Option<Error>,
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Result {
     #[serde(rename = "user_id")]
@@ -97,5 +110,38 @@ pub struct GetAllBansResult {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct BannedUserResult {
     #[serde(rename = "users")]
-    users: Option<Vec<Result>>,
+    users: Vec<Option<Result>>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetGeneralInfoResult {
+    #[serde(rename = "success")]
+    success: bool,
+
+    #[serde(rename = "result")]
+    result: GenResult,
+
+    #[serde(rename = "error")]
+    error: Option<serde_json::Value>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GenResult {
+    #[serde(rename = "user_id")]
+    user_id: i64,
+
+    #[serde(rename = "division")]
+    division: i64,
+
+    #[serde(rename = "assigned_by")]
+    assigned_by: i64,
+
+    #[serde(rename = "assigned_reason")]
+    assigned_reason: String,
+
+    #[serde(rename = "assigned_at")]
+    assigned_at: String,
+
+    #[serde(rename = "permission")]
+    permission: i64,
 }
